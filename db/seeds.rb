@@ -7,12 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
-#=> apps
-# 5.times do
-#   App.create!(name:Faker::App.name.downcase!,ceo:User.first)
-# end
 
 #=> users
+User.create!(email:'i@gmail.com', password:'foobar')
 5.times do
   User.create!(email: Faker::Internet.email, password:'foobar')
 end
+
+#=> apps
+5.times do
+  App.create!(name:Faker::App.name.downcase ,ceo:User.first)
+end
+
+
+
+  User.all.each do |user|
+    App.all.each do |app|
+      user.update_attribute(:app_id,app.id )
+    end
+
+  end
+

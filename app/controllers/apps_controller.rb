@@ -11,6 +11,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+
   end
 
   # GET /apps/new
@@ -64,10 +65,6 @@ class AppsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_app
-      @app = App.find_by(params[:name])
-    end
-
     # Only allow a list of trusted parameters through.
     def app_params
       params.require(:app).permit(:ceo_id, :developer_id, :name)

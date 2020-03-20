@@ -1,19 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Ceo:</strong>
-  <%= @app.ceo_id %>
-</p>
-
-<p>
-  <strong>Developer:</strong>
-  <%= @app.developer_id %>
-</p>
-
-<p>
+<h1>
   <strong>Name:</strong>
   <%= @app.name %>
-</p>
+</h1>
+<h3>
+  <strong>Ceo:</strong>
+  <%= @app.ceo.email %>
+</h3>
+
+
+<div>
+  <strong>Developers:</strong>
+  <%= select('developers','developer_id', @app.developers.collect {|d| [d.email, d.id]} ) %>
+</div>
+
+
+<div id="error_list">
+  <%=render 'errors/errors',errors:@app.errors %>
+</div>
+
 
 <%= link_to 'Edit', edit_app_path(@app) %> |
 <%= link_to 'Back', apps_path %>

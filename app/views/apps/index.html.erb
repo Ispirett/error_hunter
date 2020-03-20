@@ -16,12 +16,17 @@
     <% @apps.each do |app| %>
       <tr>
         <td><%= app.ceo.email %></td>
+
         <td>
+          <% if app.developers.present? %>
            <%= select('developers','developer_id', app.developers.collect {|d| [d.email, d.id]} ) %>
+            <% else %>
+             no team members
+          <% end %>
         </td>
 
         <td><%= app.name %></td>
-        <td><%= link_to 'Show', app %></td>
+        <td><%= link_to 'Show', app_path(app) %></td>
         <td><%= link_to 'Edit', edit_app_path(app) %></td>
         <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
