@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ceo:</strong>
+  <%= @app.ceo_id %>
+</p>
+
+<p>
+  <strong>Developer:</strong>
+  <%= @app.developer_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @app.name %>
+</p>
+
+<%= link_to 'Edit', edit_app_path(@app) %> |
+<%= link_to 'Back', apps_path %>
