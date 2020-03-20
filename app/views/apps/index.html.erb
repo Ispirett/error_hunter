@@ -1,39 +1,37 @@
 <p id="notice"><%= notice %></p>
-
+<h1> Logged_in: <%= @logged_in_user.email %></h1>
 <h1>Apps</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Ceo</th>
-      <th>Developers</th>
-      <th>App Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @apps.each do |app| %>
-      <tr>
-        <td><%= app.ceo.email %></td>
-
-        <td>
-          <% if app.developers.present? %>
-           <%= select('developers','developer_id', app.developers.collect {|d| [d.email, d.id]} ) %>
-            <% else %>
-             no team members
-          <% end %>
-        </td>
-
-        <td><%= app.name %></td>
-        <td><%= link_to 'Show', app_path(app) %></td>
-        <td><%= link_to 'Edit', edit_app_path(app) %></td>
-        <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<%= render 'apps/ceo_apps', ceo_apps: @ceo_apps  %>
+<hr/>
+<% if @developer_apps.present? %>
+<%= render 'apps/developer_apps', developer_apps: @developer_apps %>
+  <%else %>
+  <h4>you are not a developer in any apps</h4>
+<% end %>
+<hr/>
 <%= link_to 'New App', new_app_path %>
+
+
+<% if user_signed_in? %>
+  <li>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to('Login', new_user_session_path) %>
+  </li>
+<% end %>
+
+<article>
+  <h2>Test users</h2>
+  <p>email: <%=@test_user_one.email %> </p>
+  <p>token: <%=@test_user_one.auth_token %> </p>
+   <p>password: foobar</p>
+  <hr/>
+  <p>email: <%=@test_user_two.email %> </p>
+  <p>token: <%=@test_user_two.auth_token %> </p>
+  <p>password: foobar</p>
+
+</article>

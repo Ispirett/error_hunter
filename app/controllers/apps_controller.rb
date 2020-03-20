@@ -5,7 +5,16 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-     @apps = App.where(ceo_id: current_user)
+    @test_user_one = User.second
+    @test_user_two = User.find(6)
+
+    if user_signed_in?
+    @logged_in_user = current_user
+    @developer_apps =  current_user.developer_apps
+    end
+
+    @ceo_apps = App.where(ceo_id: current_user)
+    #=> allow developers from app to see app
   end
 
   # GET /apps/1

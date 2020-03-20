@@ -3,7 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :apps, foreign_key: :ceo_id , class_name: 'App'
   has_secure_token :auth_token
+  has_many :apps, foreign_key: :ceo_id , class_name: 'App'
+  has_many :apps_i_am_working_on, foreign_key: :developer_id, class_name: 'DeveloperApp'
 
+  def developer_apps
+    App.where(id: apps_i_am_working_on)
+  end
 end

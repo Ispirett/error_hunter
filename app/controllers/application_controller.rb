@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   def set_app
     @app = App.find_by(name: params[:name])
   end
+
+#=>
+
+
 end

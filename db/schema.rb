@@ -10,18 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_184139) do
+ActiveRecord::Schema.define(version: 2020_03_20_214917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "apps", force: :cascade do |t|
     t.integer "ceo_id"
-    t.integer "developer_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_apps_on_name", unique: true
+  end
+
+  create_table "developer_apps", force: :cascade do |t|
+    t.integer "developer_id"
+    t.integer "app_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "errors", force: :cascade do |t|
@@ -42,7 +48,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_184139) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "app_id"
     t.string "auth_token"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
