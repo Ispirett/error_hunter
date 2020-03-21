@@ -1,7 +1,8 @@
 <div class="two wide column">
      <div>
-       <h1>Apps</h1>
+       <h1 class="title blue">Apps</h1>
        <h1> Logged_in: <%= @logged_in_user.email %></h1>
+       <small> <span class="blue">secret:</span> <%= @logged_in_user.auth_token%></small>
        <%= render 'apps/ceo_apps', ceo_apps: @ceo_apps  %>
        <hr/>
        <% if @developer_apps.present? %>

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     @app = App.find_by(name: params[:name])
   end
 
-#=>
+
 
 
 end
