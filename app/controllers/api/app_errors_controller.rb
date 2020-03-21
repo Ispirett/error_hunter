@@ -26,9 +26,15 @@ class Api::AppErrorsController < ApplicationController
     @app_error = App.find_by(name:params[:app_error][:app_name].downcase)
                     .app_errors.build(app_error_params)
     if @app_error.save
+
+      AppErrorsChannel.broadcast_to(
+      @app_error.app.ceo,
+      new_error: ApplicationController.renderer
+                                      .render(partial:'app_errors/app_error', locals: { app_error: @app_error } )
+      )
       render json: { status: :created }
     else
-      render json: { errors:@app_error.errors, status: :unprocessable_entity }
+      render json: { errors: @app_error.errors, status: :unprocessable_entity }
     end
   end
 
