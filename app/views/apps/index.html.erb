@@ -1,28 +1,36 @@
-<p id="notice"><%= notice %></p>
-<h1> Logged_in: <%= @logged_in_user.email %></h1>
-<h1>Apps</h1>
+<div class="two wide column">
+     <div>
+       <h1>Apps</h1>
+       <h1> Logged_in: <%= @logged_in_user.email %></h1>
+       <%= render 'apps/ceo_apps', ceo_apps: @ceo_apps  %>
+       <hr/>
+       <% if @developer_apps.present? %>
+         <%= render 'apps/developer_apps', developer_apps: @developer_apps %>
+       <%else %>
+         <h4>you are not a developer in any apps</h4>
+       <% end %>
+       <hr/>
+       <%= link_to 'New App', new_app_path %>
 
 
-<%= render 'apps/ceo_apps', ceo_apps: @ceo_apps  %>
-<hr/>
-<% if @developer_apps.present? %>
-<%= render 'apps/developer_apps', developer_apps: @developer_apps %>
-  <%else %>
-  <h4>you are not a developer in any apps</h4>
-<% end %>
-<hr/>
-<%= link_to 'New App', new_app_path %>
+       <% if user_signed_in? %>
+         <li>
+           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+         </li>
+       <% else %>
+         <li>
+           <%= link_to('Login', new_user_session_path) %>
+         </li>
+       <% end %>
+     </div>
+
+   </div>
 
 
-<% if user_signed_in? %>
-  <li>
-    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-  </li>
-<% else %>
-  <li>
-    <%= link_to('Login', new_user_session_path) %>
-  </li>
-<% end %>
+
+
+
+
 
 <article>
   <h2>Test users</h2>

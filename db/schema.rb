@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_214917) do
+ActiveRecord::Schema.define(version: 2020_03_21_045729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "app_errors", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "serverity"
+    t.bigint "app_id", null: false
+    t.string "app_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["app_id"], name: "index_app_errors_on_app_id"
+    t.index ["app_name"], name: "index_app_errors_on_app_name"
+  end
 
   create_table "apps", force: :cascade do |t|
     t.integer "ceo_id"
@@ -37,7 +49,9 @@ ActiveRecord::Schema.define(version: 2020_03_20_214917) do
     t.bigint "app_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "app_name"
     t.index ["app_id"], name: "index_errors_on_app_id"
+    t.index ["app_name"], name: "index_errors_on_app_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,5 +68,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_214917) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "app_errors", "apps"
   add_foreign_key "errors", "apps"
 end

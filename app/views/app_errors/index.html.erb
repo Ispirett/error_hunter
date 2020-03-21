@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>App Errors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Serverity</th>
+      <th>App</th>
+      <th>App name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @app_errors.each do |app_error| %>
+      <tr>
+        <td><%= app_error.title %></td>
+        <td><%= app_error.description %></td>
+        <td><%= app_error.serverity %></td>
+        <td><%= app_error.app_id %></td>
+        <td><%= app_error.app_name %></td>
+        <td><%= link_to 'Show', app_error %></td>
+        <td><%= link_to 'Edit', edit_app_error_path(app_error) %></td>
+        <td><%= link_to 'Destroy', app_error, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New App Error', new_app_error_path %>

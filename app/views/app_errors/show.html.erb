@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @app_error.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @app_error.description %>
+</p>
+
+<p>
+  <strong>Serverity:</strong>
+  <%= @app_error.serverity %>
+</p>
+
+<p>
+  <strong>App:</strong>
+  <%= @app_error.app_id %>
+</p>
+
+<p>
+  <strong>App name:</strong>
+  <%= @app_error.app_name %>
+</p>
+
+<%= link_to 'Edit', edit_app_error_path(@app_error) %> |
+<%= link_to 'Back', app_errors_path %>

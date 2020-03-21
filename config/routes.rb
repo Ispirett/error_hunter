@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :errors
+
+  namespace :api do
+    resources :app_errors
+  end
+
   root "apps#index"
   resources :apps, param: :name
   devise_for :users
