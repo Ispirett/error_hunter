@@ -23,21 +23,15 @@ class Api::AppErrorsController < ApplicationController
   # POST /app_errors
   # POST /app_errors.json
   def create
-    # @app_error = AppError.new(app_error_params)
-    # debugger
-    @app_error = App.find_by(name:params[:app_error][:app_name].downcase).app_errors.build(app_error_params)
-
-      if @app_error.save
-        # format.html { redirect_to @app_error, notice: 'App error was successfully created.' }
-        render json: { status: :created }
-      else
-        # format.html { render :new }
-        render json: { errors:@app_error.errors, status: :unprocessable_entity }
-        end
+    @app_error = App.find_by(name:params[:app_error][:app_name].downcase)
+                    .app_errors.build(app_error_params)
+    if @app_error.save
+      render json: { status: :created }
+    else
+      render json: { errors:@app_error.errors, status: :unprocessable_entity }
+    end
   end
 
-  # PATCH/PUT /app_errors/1
-  # PATCH/PUT /app_errors/1.json
   def update
     respond_to do |format|
       if @app_error.update(app_error_params)
