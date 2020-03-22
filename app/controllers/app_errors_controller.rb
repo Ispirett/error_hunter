@@ -10,6 +10,7 @@ class AppErrorsController < ApplicationController
   # GET /app_errors/1
   # GET /app_errors/1.json
   def show
+    @app_errors = @app_error.app.app_errors.order(create_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /app_errors/new
@@ -44,7 +45,7 @@ class AppErrorsController < ApplicationController
       if @app_error.update(app_error_params)
         # format.html { redirect_to @app_error, notice: 'App error was successfully updated.' }
         # format.json { render :show, status: :ok, location: @app_error }
-        @app_errors = App.find(1).app_errors.paginate(page: params[:page], per_page: 10)
+        @app_errors = @app_error.app.app_errors.paginate(page: params[:page], per_page: 10)
         format.js
       else
         format.html { render :edit }

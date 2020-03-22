@@ -2,10 +2,15 @@
   <a class="item active" href="<%= root_path %>">
     Home
   </a>
-  <a class="item">
-    Messages
+  <a class="item" href="<%= apps_path  %>">
+    Dashboard
   </a>
-  <a class="item">
-    Friends
+  <a class="item" href="<%= apps_path  %>">
+    Account
   </a>
+  <% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'item') %>
+  <% else %>
+    <%= link_to('Login', new_user_session_path, class: 'item') %>
+  <% end %>
 </div>

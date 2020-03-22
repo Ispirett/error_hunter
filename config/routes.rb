@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :app_errors
+  root "apps#home"
+  resources :app_errors, only: [:update, :show]
+  resources :developer_apps
+  # post '/add_developer/:id', to: "apps#add_developer", as: 'add_developer'
   namespace :api do
     resources :app_errors
   end
 
-  root "apps#index"
+
   resources :apps, param: :name
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

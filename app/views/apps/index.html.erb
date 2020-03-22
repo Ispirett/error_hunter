@@ -1,8 +1,48 @@
 <div class="two wide column">
      <div>
        <h1 class="title blue">Apps</h1>
-       <h1> Logged_in: <%= @logged_in_user.email %></h1>
-       <small> <span class="blue">secret:</span> <%= @logged_in_user.auth_token%></small>
+       <%if user_signed_in? %>
+         <h1> Logged_in: <%= @logged_in_user.email %></h1>
+         <small> <span class="blue">secret:</span> <%= @logged_in_user.auth_token%></small>
+       <% end  %>
+
+<!--       headline info-->
+       <div class="ui four statistics purple-shadow headline">
+         <div class="statistic">
+           <div class="value">
+             200
+           </div>
+           <div class="label">
+             Fixed Bugs
+           </div>
+         </div>
+         <div class="statistic">
+           <div class="value">
+              400
+           </div>
+           <div class="label">
+             Total errors
+           </div>
+         </div>
+         <div class="statistic">
+           <div class="value">
+             <i class="laptop icon"></i><%= current_user.apps.count %>
+           </div>
+           <div class="label">
+              Apps
+           </div>
+         </div>
+         <div class="statistic">
+           <div class="value">
+             <img src="https://image.shutterstock.com/image-vector/people-strong-5-logo-template-260nw-141039172.jpg" class="ui circular inline image">
+             4
+           </div>
+           <div class="label">
+             Team Members Online
+           </div>
+         </div>
+       </div>
+
        <%= render 'apps/ceo_apps', ceo_apps: @ceo_apps  %>
        <hr/>
        <% if @developer_apps.present? %>
@@ -13,16 +53,6 @@
        <hr/>
        <%= link_to 'New App', new_app_path %>
 
-
-       <% if user_signed_in? %>
-         <li>
-           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-         </li>
-       <% else %>
-         <li>
-           <%= link_to('Login', new_user_session_path) %>
-         </li>
-       <% end %>
      </div>
 
    </div>
@@ -33,14 +63,3 @@
 
 
 
-<article>
-  <h2>Test users</h2>
-  <p>email: <%=@test_user_one.email %> </p>
-  <p>token: <%=@test_user_one.auth_token %> </p>
-   <p>password: foobar</p>
-  <hr/>
-  <p>email: <%=@test_user_two.email %> </p>
-  <p>token: <%=@test_user_two.auth_token %> </p>
-  <p>password: foobar</p>
-
-</article>

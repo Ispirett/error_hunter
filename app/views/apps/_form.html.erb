@@ -1,4 +1,5 @@
-<%= form_with(model: app, local: true) do |form| %>
+
+<%= form_with(model: app, local: true, class: 'ui form') do |form| %>
   <% if app.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(app.errors.count, "error") %> prohibited this app from being saved:</h2>
@@ -11,17 +12,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :ceo_id %>
-    <%= form.number_field :ceo_id %>
-  </div>
 
-  <div class="field">
-    <%= form.label :developer_id %>
-    <%= form.number_field :developer_id %>
-  </div>
-
-  <div class="field">
+  <div class="field six wide">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>

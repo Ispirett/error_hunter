@@ -1,13 +1,16 @@
 class AppsController < ApplicationController
-  before_action :set_app, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_app, only: [:show, :edit, :update, :destroy, :add_developer]
+  before_action :authenticate_user!, only: [:new, :create, :index]
 
   # GET /apps
   # GET /apps.json
-  def index
+  def home
     @test_user_one = User.second
     @test_user_two = User.find(6)
+  end
 
+
+  def index
     if user_signed_in?
     @logged_in_user = current_user
     @developer_apps =  current_user.developer_apps
@@ -20,7 +23,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
-    @app_errors = @app.app_errors.paginate(page: params[:page], per_page: 10)
+    @app_errors = @app.app_errors.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /apps/new
@@ -31,6 +34,8 @@ class AppsController < ApplicationController
   # GET /apps/1/edit
   def edit
   end
+
+
 
   # POST /apps
   # POST /apps.json
@@ -47,6 +52,8 @@ class AppsController < ApplicationController
       end
     end
   end
+
+
 
   # PATCH/PUT /apps/1
   # PATCH/PUT /apps/1.json

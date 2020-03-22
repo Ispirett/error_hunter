@@ -1,0 +1,58 @@
+
+
+<header id="header">
+    <h1 class="header"> ErrorHunter</h1>
+    <h3>Track errors in your apps in realtime don't leave your app vulnerable!</h3>
+
+
+  <div>
+    <div class="ui buttons">
+      <% if user_signed_in? %>
+        <%= link_to( destroy_user_session_path, method: :delete, class: 'item') do %>
+          <button class="ui button">Logout</button>
+        <%end %>
+
+      <% else %>
+        <%= link_to(apps_path, class: 'item') do %>
+          <button class="ui button">Login</button>
+        <% end %>
+      <% end %>
+      <div class="or"></div>
+      <a href="<%= apps_path %>">
+        <button class="ui positive button">Dashboard ></button>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+
+
+<br/>
+
+<div id="wrapper">
+  <table class="ui celled padded table shadow">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Token</th>
+      <th>Password</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%=@test_user_one.email %> </td>
+      <td><%=@test_user_one.auth_token %> </td>
+      <td>foobar</td>
+    </tr>
+
+    <tr>
+      <td><%=@test_user_two.email %> </td>
+      <td><%=@test_user_two.auth_token %> </td>
+      <td>foobar</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>

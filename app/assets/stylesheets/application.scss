@@ -15,6 +15,35 @@
  */
 @import "semantic-ui";
 
+$main-bg: rgba(211, 211, 211, 0.26);
+
+#main-body{
+  margin-left: 6%;
+}
+
+
+#header{
+  background-image: linear-gradient(90deg, rgba(31, 31, 31, 0.55), rgba(0, 0, 0, 0.42)),url("https://www.spotstudio.net/blog/wp-content/uploads/2016/03/137525792042e15.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  height: 40em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1{
+    font-size: 6em;
+  }
+}
+
+#wrapper{
+  margin: 0 auto;
+  width: 80% !important;
+}
+body{
+  background: $main-bg;
+}
 .top{
   position: fixed;
 }
@@ -28,20 +57,20 @@
 .none{
   display: none;
 }
-
-@media screen and (max-width: 1720px ){
+//
+//@media screen and (max-width: 1720px ){
+//  .full-height{
+//    width: 12em !important ;
+//  }
+//}
+//@media screen and (max-width: 1620px ){
+//  .full-height{
+//    width: 8em !important ;
+//  }
+//}
+@media screen and (max-width: 1200px ){
   .full-height{
-    width: 12em !important ;
-  }
-}
-@media screen and (max-width: 1620px ){
-  .full-height{
-    width: 8em !important ;
-  }
-}
-@media screen and (max-width: 930px ){
-  .full-height{
-    width: 6em !important;
+    width: 10em !important;
   }
 
 }
@@ -49,6 +78,8 @@
   .full-height{
     left: -20em !important;
   }
-
+  #main-body{
+    margin-left: 0;
+  }
 }
 

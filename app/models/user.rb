@@ -14,4 +14,7 @@ class User < ApplicationRecord
   def username
     self.email.split('@').first
   end
+  def self.available_developers(app)
+    User.where.not(id: (app.developers + [app.ceo])).map {|d| [d.username, d.id]}
+  end
 end
