@@ -1,0 +1,6 @@
+document.getElementById('errors').innerHTML = `<%=render 'app_errors/app_errors',app_errors: @app_errors %>`
+var pages = document.querySelectorAll('.pagination a');
+
+pages.forEach((page)=>{
+    page.setAttribute('data-remote', true)
+})

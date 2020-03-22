@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :app_errors
   namespace :api do
     resources :app_errors
   end

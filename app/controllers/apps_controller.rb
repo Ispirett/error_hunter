@@ -20,7 +20,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
-
+    @app_errors = @app.app_errors.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /apps/new

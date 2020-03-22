@@ -6,45 +6,75 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
+    <th>Log</th>
     <th>Severity</th>
     <th>App name</th>
     <th>Assign Developer</th>
+    <th>Status</th>
   </tr>
   </thead>
 
   <tbody id="error_list">
   <% app_errors.each do |app_error| %>
-    <tr>
+    <tr data-controller="appError">
       <td class="ui center aligned sub header"><%= app_error.title %></td>
       <td><%= app_error.description %></td>
+      <td><%= app_error.log %></td>
       <td><%= app_error.serverity %></td>
       <td><%= app_error.app_name %></td>
-      <td><%= select('developers','developer_id',app_error.app.developers.collect {|d| [d.username, d.id]} ) %></td>
-      <td><button class="ui red button ">
-        <i class="icon close"></i>
-         fixed
-      </button>
+      <td>
+        <%=form_with(model: app_error, method: :patch) do |f| %>
+          <%= f.select :developer_id, app_error.app.developers.map {|d| [d.username, d.id]},
+                       {}, {"data-action": "change->appError#handleDeveloperForm"} %>
+          <button class="none" data-target="appError.developerFormButton"></button>
+        <% end %>
+      </td>
+
+      <td>
+      <%= form_with model: app_error,
+                    method: :patch, remote:true do |f| %>
+          <%= f.select :status, AppError.status_options, {}, {"data-action": "change->appError#handleStatusForm"} %>
+          <button class="none" data-target="appError.statusFormButton"></button>
+
+            <% if app_error.status === "solved" %>
+              <i class="check circle icon green "></i>
+            <%elsif app_error.status === 'in_progress' %>
+            <i class="close circle icon yellow  "></i>
+            <%else  %>
+             <i class="times circle icon red"></i>
+            <% end %>
+
+        <% end %>
+
       </td>
     </tr>
   <% end %>
   </tbody>
-  <tfoot>
-  <tr><th colspan="5">
-    <div class="ui right floated pagination menu">
-      <a class="icon item">
-        <i class="left chevron icon"></i>
-      </a>
-      <a class="item">1</a>
-      <a class="item">2</a>
-      <a class="item">3</a>
-      <a class="item">4</a>
-      <a class="icon item">
-        <i class="right chevron icon"></i>
-      </a>
-    </div>
-  </th>
-  </tr></tfoot>
+<!--  <tfoot>-->
+<!--  <tr><th colspan="5">-->
+<!--    <div class="ui right floated pagination menu">-->
+<!--      <a class="icon item">-->
+<!--        <i class="left chevron icon"></i>-->
+<!--      </a>-->
+<!--      <a class="item">1</a>-->
+<!--      <a class="item">2</a>-->
+<!--      <a class="item">3</a>-->
+<!--      <a class="item">4</a>-->
+<!--      <a class="icon item">-->
+<!--        <i class="right chevron icon"></i>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </th>-->
+<!--  </tr></tfoot>-->
 </table>
 
 <br>
+<%= will_paginate @app_errors %>
+<script>
 
+    var pages = document.querySelectorAll('.pagination a')
+    pages.forEach((page)=>{
+        page.setAttribute('data-remote', true)
+    })
+
+</script>

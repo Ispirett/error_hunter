@@ -4,7 +4,7 @@ class AppErrorsController < ApplicationController
   # GET /app_errors
   # GET /app_errors.json
   def index
-    @app_errors = AppError.all
+    @app_errors = AppError.all.includes(:developers)
   end
 
   # GET /app_errors/1
@@ -42,8 +42,10 @@ class AppErrorsController < ApplicationController
   def update
     respond_to do |format|
       if @app_error.update(app_error_params)
-        format.html { redirect_to @app_error, notice: 'App error was successfully updated.' }
-        format.json { render :show, status: :ok, location: @app_error }
+        # format.html { redirect_to @app_error, notice: 'App error was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @app_error }
+        @app_errors = App.find(1).app_errors.paginate(page: params[:page], per_page: 10)
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @app_error.errors, status: :unprocessable_entity }
@@ -69,6 +71,6 @@ class AppErrorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def app_error_params
-      params.require(:app_error).permit(:title, :description, :serverity, :app_id, :app_name)
+      params.require(:app_error).permit(:title, :description, :serverity, :app_id, :app_name, :status, :developer_id)
     end
 end
