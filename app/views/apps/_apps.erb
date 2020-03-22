@@ -11,7 +11,12 @@
   <tbody>
   <% apps.each do |app| %>
     <tr data-controller="appError">
-      <td class="ui center aligned sub header" ><%= app.ceo.username %></td>
+
+      <td class="ui center aligned sub header" >
+        <h4><%= app.ceo.username %> </h4>
+        <img class="ui avatar image" src="https://cdn0.iconfinder.com/data/icons/social-media-network-4/48/male_avatar-512.png">
+
+      </td>
 
       <td class="ui center aligned sub header">
         <% if app.developers.present? %>
