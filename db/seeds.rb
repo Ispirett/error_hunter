@@ -9,7 +9,7 @@
 require 'faker'
 
 #=> users
-User.create!(email:'i@gmail.com', password:'foobar')
+User.create!(email:'ispirett@gmail.com', password:'foobar')
 5.times do
   User.create!(email: Faker::Internet.email, password:'foobar')
 end
@@ -21,10 +21,10 @@ end
 
 
 
-  User.all.each do |user|
-    App.all.each do |app|
-      user.update_attribute(:app_id,app.id )
-    end
-
-  end
+  # User.all.each do |user|
+  #   App.all.each do |app|
+  #     user.update_attribute(:app_id,app.id )
+  #   end
+  #
+  # end
 
