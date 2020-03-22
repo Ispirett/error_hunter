@@ -16,7 +16,7 @@ consumer.subscriptions.create("AppErrorsChannel", {
     if(error_list != null){
       const tr = document.createElement('tr');
       tr.innerHTML = data.new_error
-      error_list.appendChild(tr)
+      error_list.prepend(tr)
     }
   }
 });
