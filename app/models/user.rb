@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def developer_apps
     App.where(id: apps_i_am_working_on)
   end
+
+  def username
+    self.email.split('@').first
+  end
 end

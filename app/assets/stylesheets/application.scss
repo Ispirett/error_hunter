@@ -25,3 +25,26 @@
 .blue{
   color: #4183c4;
 }
+
+@media screen and (max-width: 1720px ){
+  .full-height{
+    width: 12em !important ;
+  }
+}
+@media screen and (max-width: 1620px ){
+  .full-height{
+    width: 8em !important ;
+  }
+}
+@media screen and (max-width: 930px ){
+  .full-height{
+    width: 6em !important;
+  }
+
+}
+@media screen and (max-width: 800px ){
+  .full-height{
+    left: -20em !important;
+  }
+
+}

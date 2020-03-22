@@ -6,22 +6,16 @@ class Api::AppErrorsController < ApplicationController
     @app_errors = AppError.all
   end
 
-  # GET /app_errors/1
-  # GET /app_errors/1.json
   def show
   end
 
-  # GET /app_errors/new
   def new
     @app_error = AppError.new
   end
 
-  # GET /app_errors/1/edit
   def edit
   end
 
-  # POST /app_errors
-  # POST /app_errors.json
   def create
     @app_name = params[:app_error][:app_name]
     if(@app_name == 'app_name' || App.find_by(name: @app_name).nil?)
@@ -58,8 +52,6 @@ class Api::AppErrorsController < ApplicationController
     end
   end
 
-  # DELETE /app_errors/1
-  # DELETE /app_errors/1.json
   def destroy
     @app_error.destroy
     respond_to do |format|
@@ -69,12 +61,10 @@ class Api::AppErrorsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_app_error
     @app_error = AppError.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def app_error_params
     params.require(:app_error).permit(:title, :description, :serverity, :app_name)
   end
