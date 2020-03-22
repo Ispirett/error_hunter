@@ -1,12 +1,17 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy, :add_developer]
-  before_action :authenticate_user!, only: [:new, :create, :index]
-
+  before_action :authenticate_user! , except: :home
+  before_action :app_owner?, only: [:destroy, :update]
   # GET /apps
   # GET /apps.json
   def home
     @test_user_one = User.second
     @test_user_two = User.find(6)
+    # logger.info ErrorHunter::App.add_error(title: "HomeController",
+    #                            description: "app has melted" ,
+    #                            log: "fish_file/auth.js on line 8 unknown method" ,
+    #                            serverity: "urgent")
+
   end
 
 
@@ -73,6 +78,7 @@ class AppsController < ApplicationController
   # DELETE /apps/1.json
   def destroy
     @app.destroy
+
     respond_to do |format|
       format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
       format.json { head :no_content }

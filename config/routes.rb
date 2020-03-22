@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   root "apps#home"
   resources :app_errors, only: [:update, :show]
-  resources :developer_apps
+  resources :developer_apps, only: [:create]
   # post '/add_developer/:id', to: "apps#add_developer", as: 'add_developer'
   namespace :api do
-    resources :app_errors
+    resources :app_errors, only: :create
   end
 
 

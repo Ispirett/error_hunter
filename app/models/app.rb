@@ -1,7 +1,7 @@
 class App < ApplicationRecord
   belongs_to :ceo, class_name: 'User'
-  has_many :developer_apps
-  has_many :app_errors
+  has_many :developer_apps, dependent: :destroy
+  has_many :app_errors, dependent: :destroy
   def to_param
     name
   end
