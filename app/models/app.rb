@@ -9,5 +9,11 @@ class App < ApplicationRecord
   def developers
     User.where(id:developer_apps.select(:developer_id))
   end
+# get developers and ceo of app
+# if the user with the token  matches the list above then the error would be saved.
+  def is_post_authorized?(token)
+    user = User.find_by(auth_token: token)
+    self.developers.include?(user) || ceo == user
+  end
 
 end
