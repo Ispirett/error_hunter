@@ -5,6 +5,7 @@ ruby '2.6.3'
 gem 'devise'
 # 'users'
 gem 'semantic-ui-sass'
+gem 'pundit'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use postgresql as the database for Active Record
@@ -30,7 +31,8 @@ gem 'rack-cors'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 # personal
-gem 'error_hunter'
+gem 'error_hunter', ' >= 0.1.2'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'

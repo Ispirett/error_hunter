@@ -2,6 +2,7 @@ class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy, :add_developer]
   before_action :authenticate_user! , except: :home
   before_action :app_owner?, only: [:destroy, :update]
+  include Pundit
   # GET /apps
   # GET /apps.json
   def home
@@ -28,6 +29,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+    authorize @app
     @app_errors = @app.app_errors.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
@@ -46,7 +48,7 @@ class AppsController < ApplicationController
   # POST /apps.json
   def create
     @app = App.new(app_params)
-
+    @app.name.downcase!
     respond_to do |format|
       if @app.save
         format.html { redirect_to @app, notice: 'App was successfully created.' }

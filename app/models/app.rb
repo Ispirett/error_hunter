@@ -2,6 +2,9 @@ class App < ApplicationRecord
   belongs_to :ceo, class_name: 'User'
   has_many :developer_apps, dependent: :destroy
   has_many :app_errors, dependent: :destroy
+  before_save self.name.downcase!
+  validates :name, presence: true, length: {minimum: 2, maximum: 40}
+
   def to_param
     name
   end

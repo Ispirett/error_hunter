@@ -1,6 +1,7 @@
 class Api::AppErrorsController < ApplicationController
   before_action :set_app_error, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: [:create, :update]
+  include Pundit
 
   def index
     @app_errors = AppError.all
@@ -18,23 +19,33 @@ class Api::AppErrorsController < ApplicationController
 
   def create
     @app_name = params[:app_error][:app_name]
+    auth_token = request.headers[:AuthToken]
     if(@app_name == 'app_name' || App.find_by(name: @app_name).nil?)
       render json: { errors: "app name is missing or does not exist!", status: :unprocessable_entity }
     else
 
-      @app_error = App.find_by(name:params[:app_error][:app_name].downcase)
-                       .app_errors.build(app_error_params)
-      if @app_error.save
+      @app = App.find_by(name:@app_name.downcase)
 
-        AppErrorsChannel.broadcast_to(
-            @app_error.app.ceo,
-            new_error: ApplicationController.renderer
-                           .render(partial:'app_errors/app_error', locals: { app_error: @app_error } )
-        )
-        render json: { status: :created }
+      if @app.is_post_authorized?(auth_token)
+        @app_error = AppError.new(app_error_params)
+        @app_error.app_id = @app.id
+        if @app_error.save
+
+          ActionCable.server.broadcast(
+              'app_errors_channel',
+              new_error: ApplicationController.renderer
+                             .render(partial: 'app_errors/app_error', locals: { app_error: @app_error })
+          )
+
+          render json: { status: :created }
+        else
+          render json: { errors: @app_error.errors, status: :unprocessable_entity }
+        end
+
       else
-        render json: { errors: @app_error.errors, status: :unprocessable_entity }
+        render json: { errors: "you are not authorized to post this error!", status: :unprocessable_entity }
       end
+
     end
 
 
