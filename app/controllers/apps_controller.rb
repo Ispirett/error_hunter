@@ -48,6 +48,7 @@ class AppsController < ApplicationController
   # POST /apps.json
   def create
     @app = App.new(app_params)
+    @app.ceo = current_user
     @app.name.downcase!
     respond_to do |format|
       if @app.save
