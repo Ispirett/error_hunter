@@ -13,10 +13,16 @@ consumer.subscriptions.create("AppErrorsChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     const error_list =  document.getElementById('error_list');
-    if(error_list != null){
-      const tr = document.createElement('tr');
-      tr.innerHTML = data.new_error
-      error_list.prepend(tr)
+    const app_name = document.getElementById('app_name')
+    if(app_name != null){
+      if(app_name.innerText === data.app_name){
+        if(error_list != null){
+          const tr = document.createElement('tr');
+          tr.innerHTML = data.new_error
+          error_list.prepend(tr)
+        }
+      }
     }
+
   }
 });

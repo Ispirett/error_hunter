@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :apps_i_am_working_on, foreign_key: :developer_id, class_name: 'DeveloperApp'
 
   def developer_apps
-    App.where(id: apps_i_am_working_on)
+    App.where(id: apps_i_am_working_on.select(:app_id))
   end
 
   def username

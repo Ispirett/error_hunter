@@ -1,5 +1,5 @@
 class AppPolicy < ApplicationPolicy
   def show?
-    @record.ceo.id == @user.id
+    @record.ceo.id == @user.id or @record.developers.include?(@user)
   end
 end

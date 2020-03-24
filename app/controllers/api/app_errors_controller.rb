@@ -30,13 +30,17 @@ class Api::AppErrorsController < ApplicationController
         @app_error = AppError.new(app_error_params)
         @app_error.app_id = @app.id
         if @app_error.save
-
-          ActionCable.server.broadcast(
-              'app_errors_channel',
+          # TODO SEND ALL USERS OF APP
+          #
+          @app.all_developers_and_ceo.each do |user|
+          AppErrorsChannel.broadcast_to(
+              user,
+              app_name: @app.name,
               new_error: ApplicationController.renderer
                              .render(partial: 'app_errors/app_error', locals: { app_error: @app_error })
           )
 
+          end
           render json: { status: :created }
         else
           render json: { errors: @app_error.errors, status: :unprocessable_entity }
