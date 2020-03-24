@@ -7,11 +7,11 @@ class AppsController < ApplicationController
   # GET /apps.json
   def home
     @test_user_one = User.second
-    @test_user_two = User.find(6)
+    @test_user_two = User.third
     # logger.info ErrorHunter::App.add_error(title: "HimController",
     #                            description: "app has melted" ,
     #                            log: "fish_file/auth.js on line 8 unknown method" ,
-    #                            serverity: "urgent")
+    #                            severity: "urgent")
 
   end
 

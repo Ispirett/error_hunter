@@ -81,7 +81,7 @@ class Api::AppErrorsController < ApplicationController
   end
 
   def app_error_params
-    params.require(:app_error).permit(:title, :description, :serverity, :app_name, :log )
+    params.require(:app_error).permit(:title, :description, :severity, :app_name, :log )
   end
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_041525) do
+ActiveRecord::Schema.define(version: 2020_03_24_050855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_041525) do
   create_table "app_errors", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.string "serverity"
+    t.string "severity"
     t.bigint "app_id", null: false
     t.string "app_name"
     t.datetime "created_at", precision: 6, null: false
@@ -47,18 +47,6 @@ ActiveRecord::Schema.define(version: 2020_03_23_041525) do
     t.index ["developer_id", "app_id"], name: "index_developer_apps_on_developer_id_and_app_id", unique: true
   end
 
-  create_table "errors", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "serverity"
-    t.bigint "app_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "app_name"
-    t.index ["app_id"], name: "index_errors_on_app_id"
-    t.index ["app_name"], name: "index_errors_on_app_name"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -74,5 +62,4 @@ ActiveRecord::Schema.define(version: 2020_03_23_041525) do
   end
 
   add_foreign_key "app_errors", "apps"
-  add_foreign_key "errors", "apps"
 end

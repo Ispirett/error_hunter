@@ -72,6 +72,6 @@ class AppErrorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def app_error_params
-      params.require(:app_error).permit(:title, :description, :serverity, :app_id, :app_name, :status, :developer_id)
+      params.require(:app_error).permit(:title, :description, :severity, :app_id, :app_name, :status, :developer_id)
     end
 end

@@ -3,7 +3,7 @@ class CreateAppErrors < ActiveRecord::Migration[6.0]
     create_table :app_errors do |t|
       t.string :title
       t.string :description
-      t.string :serverity
+      t.string :severity
       t.references :app, null: false, foreign_key: true
       t.string :app_name
 
