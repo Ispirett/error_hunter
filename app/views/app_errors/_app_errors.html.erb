@@ -8,7 +8,6 @@
     <th>Description</th>
     <th>Log</th>
     <th>Severity</th>
-    <th>App name</th>
     <th>Assigned Developer</th>
     <th>Status</th>
   </tr>
@@ -21,12 +20,11 @@
       <td><%= app_error.description %></td>
       <td><%= app_error.log %></td>
       <td><%= app_error.severity %></td>
-      <td><%= app_error.app_name %></td>
       <!-- developer -->
       <td>
-        <%=form_with(model: app_error, method: :patch) do |f| %>
+        <%=form_with(model: app_error,url:assign_developer_path(app_error.id), method: :patch) do |f| %>
           <%= f.select :developer_id, app_error.app.developers.map {|d| [d.username, d.id]},
-                       {}, {"data-action": "change->appError#handleDeveloperForm", class: 'ui search dropdown'} %>
+                       {}, {"data-action": "change->appError#handleDeveloperForm", id: 'app_'+ app_error.id.to_s, class: 'ui search dropdown'} %>
           <button class="none" data-target="appError.developerFormButton"></button>
         <% end %>
       </td>
@@ -35,12 +33,12 @@
       <td>
       <%= form_with model: app_error,
                     method: :patch, remote:true do |f| %>
-          <%= f.select :status, AppError.status_options, {}, {"data-action": "change->appError#handleStatusForm", class: 'ui  search dropdown' } %>
+          <%= f.select :status, AppError.status_options, {}, {"data-action": "change->appError#handleStatusForm", id: 'app_'+ app_error.id.to_s, class: 'ui  search dropdown' } %>
           <button class="none" data-target="appError.statusFormButton"></button>
 
             <% if app_error.status === "solved" %>
               <i class="check circle icon green "></i>
-            <%elsif app_error.status === 'in_progress' %>
+            <% elsif app_error.status === 'in_progress' %>
             <i class="close circle icon yellow  "></i>
             <%else  %>
              <i class="times circle icon red"></i>

@@ -24,17 +24,22 @@ class AppErrorsController < ApplicationController
 
   # POST /app_errors
   # POST /app_errors.json
+
   def create
     @app_error = AppError.new(app_error_params)
 
-    respond_to do |format|
       if @app_error.save
-        format.html { redirect_to @app_error, notice: 'App error was successfully created.' }
-        format.json { render :show, status: :created, location: @app_error }
+        redirect_to @app_error, notice: 'App error was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @app_error.errors, status: :unprocessable_entity }
+        redirect_to @app_error, notice:  @app_error.errors.full_messages
       end
+    end
+
+
+  def assign_developer
+    @app_error = AppError.find(params[:id])
+    if @app_error.update(app_error_params)
+       @app_errors = @app_error.app.app_errors.paginate(page: params[:page], per_page: 10)
     end
   end
 
