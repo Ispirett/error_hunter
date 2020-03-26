@@ -26,4 +26,13 @@ class App < ApplicationRecord
     User.where(id: (developers + [ceo]))
   end
 
+
+# @return [ActiveRecord] array of all app by user
+  def all_apps_by_user(user)
+    where(ceo:user)
+  end
+  def get_error_count_per_app
+
+  end
+
 end
