@@ -21,7 +21,9 @@
       <td class="ui center aligned sub header">
         <% if app.developers.present? %>
           <h5>Developers</h5>
-          <%= select('developers','developer_id', app.developers.collect {|d| [d.username, d.id]} ) %>
+          <%= select('developers','developer_id', app.developers.collect {|d| [d.username, d.id]} ,{},
+                     class:"ui dropdown"
+                     ) %>
         <% else %>
           no team members
         <% end %>
@@ -30,15 +32,15 @@
            <h5>Add developer</h5>
           <%= f.hidden_field :app_id , value: app.id %>
           <%= f.select :developer_id, User.available_developers(app),
-                       {}, {"data-action": "change->appError#handleDeveloperForm"} %>
+                       {}, {"data-action": "change->appError#handleDeveloperForm",class:"ui dropdown"} %>
           <button class="none" data-target="appError.developerFormButton"></button>
         <% end %>
       </td>
 
       <td class="ui center aligned sub header"><%= app.name %></td>
-      <td><%= link_to 'Show', app_path(app) %></td>
+      <td><%= link_to 'Show', app_path(app), class: 'ui green button' %></td>
 <!--      <td><%#= link_to 'Edit', edit_app_path(app) %></td>-->
-      <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' %></td>
     </tr>
   <% end %>
   </tbody>
