@@ -27,7 +27,7 @@ class App < ApplicationRecord
   end
 
 
-# @return [ActiveRecord] array of all app by user
+# @return [ActiveRecord] array of all apps by user
   def all_apps_by_user(user)
     where(ceo:user)
   end
