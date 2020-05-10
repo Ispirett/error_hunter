@@ -35,7 +35,6 @@ class AppErrorsController < ApplicationController
       end
     end
 
-  r
   def assign_developer
     @app_error = AppError.find(params[:id])
     if @app_error.update(app_error_params)

@@ -6,4 +6,8 @@ class AppError < ApplicationRecord
   def self.status_options
     %w(solved not_solved in_progress)
   end
+
+  def all_apps_errors
+
+  end
 end
