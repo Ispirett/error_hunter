@@ -3,7 +3,7 @@
        <h1 class="title blue">Apps</h1>
        <%if user_signed_in? %>
          <h1> Logged_in: <%= @logged_in_user.email %></h1>
-         <small> <span class="blue">secret:</span> <%= @logged_in_user.auth_token%></small>
+         <small> <span class="blue">secret_key:</span> <%= @logged_in_user.auth_token%></small>
        <% end  %>
 
 <!--       headline info-->
